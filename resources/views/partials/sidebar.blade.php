@@ -73,14 +73,14 @@
         @auth
             <li class="nav-heading">User</li>
 
-            <li class="nav-item {{ Request::is('dashboard/profile') ? 'active' : '' }}">
-                <a class="nav-link collapsed" href="/dashboard/profile">
+            <li class="nav-item">
+                <a class="nav-link collapsed {{ Request::is("dashboard/user/profile") ? "active" : ""  }}" href="/dashboard/user/profile">
                     <i class="bi bi-person"></i>
                     <span>Profile</span>
                 </a>
             </li>
-            <li class="nav-item {{ Request::is("/dashboard") ? "active" : "" }}">
-                <a class="nav-link collapsed" href="/dashboard/carts">
+            <li class="nav-item">
+                <a class="nav-link collapsed {{ Request::is("dashboard/user/carts") ? "active" : "" }}" href="/dashboard/user/carts">
                     <i class="bi bi-grid"></i>
                     <span>Dashboard</span>
                 </a>
@@ -100,10 +100,16 @@
         @endauth
         @can("admin")
             <li class="nav-heading">Admin</li>
-            <li class="nav-item {{ Request::is("/dashboard/products") ? 'active' : '' }}">
-                <a class="nav-link collapsed" href="/dashboard/products">
+            <li class="nav-item">
+                <a class="nav-link collapsed {{ Request::is("dashboard/products") ? "active" : "" }}" href="/dashboard/products">
                     <i class="bi bi-person"></i>
                     <span>Manage Products</span>
+                </a>
+            </li>
+            <li class="nav-item ">
+                <a class="nav-link collapsed {{ Request::is("dashboard/orders") ? 'active' : '' }}" href="/dashboard/orders">
+                    <i class="bi bi-person"></i>
+                    <span>Manage Orders</span>
                 </a>
             </li>
         @endcan

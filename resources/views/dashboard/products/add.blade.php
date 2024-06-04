@@ -5,7 +5,7 @@
         <div class="col-lg-8">
             <div class="card p-3">
                 <h2 class="text-center">Add new Product</h2>
-                <form action="/dashboard/products" method="post">
+                <form action="/dashboard/products" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="mb-2">
                         <label for="inputName" class="form-label">Product Name</label>
@@ -46,6 +46,12 @@
                             </div>
                         @enderror
                     </div>
+                    <mb-3>
+                        <div class="mb-3">
+                            <label for="formFile" class="form-label">Product image</label>
+                            <input class="form-control" type="file" id="formFile" name="images[]" multiple>
+                          </div>
+                    </mb-3>
                     <div class="d-grid">
                         <button type="submit" class="btn btn-primary">Add Product</button>
                     </div>

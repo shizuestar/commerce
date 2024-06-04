@@ -16,8 +16,8 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         User::create([
-            "name" => "naruhina",
-            "username" => "naruhina",
+            "name" => "saskehhhh",
+            "username" => "saskehhh",
             "phone" => "08877665544",
             "role" => "admin",
             "gender" => "Male",
@@ -26,7 +26,7 @@ class DatabaseSeeder extends Seeder
             "password" => bcrypt("password")
         ]);
         User::factory(5)->create();
-        Product::factory(20)->create();
+        Product::factory(5)->create();
 
     }
 }

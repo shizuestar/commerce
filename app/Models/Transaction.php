@@ -12,7 +12,7 @@ class Transaction extends Model
 
     protected $guarded = ['transaction_id'];
 
-    public function Transaction()
+    public function TransactionsT()
     {
         return $this->belongsTo(User::class);
     }
@@ -23,8 +23,8 @@ class Transaction extends Model
     public static function addToCart(User $user, Product $product, $request)
     {
         $total = $request * $product->price;
+        
         $transaction = Transaction::create([
-
             'user_id' => $user->id,
             'product_id' => $product->id,
             'total' => $total,
@@ -39,6 +39,14 @@ class Transaction extends Model
             'price' => $product->price,
             'subtotal' => $total
         ]);
+
+        $stock = ($product->stock) - $request;
+        $stock = [
+            "stock" => $stock
+        ];
+        Product::where("id", $product->id)->update($stock);
+
+
         return $transaction;
     }
 

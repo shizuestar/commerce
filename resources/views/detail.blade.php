@@ -4,7 +4,25 @@
     <section class="pb-5">
         <div class="container px-4 px-lg-5 mb-5 mt-3">
             <div class="row gx-4 gx-lg-5 align-items-center">
-                <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" src="https://source.unsplash.com/600x500/?food" alt="..." /></div>
+                <div class="col-md-6">
+                    <div id="carouselExample{{ $product->id }}" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-inner">
+                            @foreach ($product->PicProduct as $pic)
+                                <div class="carousel-item @if ($loop->first) active @endif">
+                                    <img src="{{ asset("storage/" . $pic->name) }}" class="card-img-top mb-3 mb-md-0" alt="{{ $product->name }}">
+                                </div>
+                            @endforeach
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample{{ $product->id }}" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExample{{ $product->id }}" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                    </div>
+                    <img class="card-img-top mb-5 mb-md-0" src="" ></div>
                 <div class="col-md-6">
                     <h1 class="display-5 fw-bolder">{{ $product->name }}</h1>
                     <div class="fs-5 mb-5">

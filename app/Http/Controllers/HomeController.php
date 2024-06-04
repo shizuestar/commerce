@@ -9,8 +9,12 @@ class HomeController extends Controller
 {
     public function index()
     {
+        $products = Product::all();
+        if (request("search")){
+            $products = Product::where("name", "like", "%" . request("search") . "%")->get(); 
+        }
         return view("index", [
-            "products" => Product::all(),
+            "products" => $products,
             "title" => "Home"
         ]);
     }

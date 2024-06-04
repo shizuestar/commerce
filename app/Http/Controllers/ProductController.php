@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use App\Http\Requests\StoreProductRequest;
+use App\Models\PicProduct;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -39,6 +40,8 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request->file("images"));
+        // return $request->file("images");
         $validateData = $request->validate([
             "name" => "required",
             "price" => "required",
@@ -47,6 +50,19 @@ class ProductController extends Controller
         ]);
         
         Product::create($validateData);
+
+        $lastProductId = Product::latest()->first()->id;
+        $images = $request->file("images");
+
+        foreach( $images as $image ){
+            $uploadImg = $image->store("productsImg");
+            $nameImage = $uploadImg;
+
+            PicProduct::create([
+                "name" => $nameImage,
+                "product_id" => $lastProductId
+            ]);
+        }
 
         return redirect("/dashboard/products")->with("succes", "Product successful added!");
     }

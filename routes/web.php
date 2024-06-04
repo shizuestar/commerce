@@ -23,8 +23,9 @@ use App\Http\Controllers\RegisterController;
 Route::get('/', [HomeController::class, "index"]);
 
 Route::get("/detail/{product}", [HomeController::class, "show"]);
-Route::post("/detail/cart", [CartController::class, "storeCart"]);
 
+
+Route::post("/detail/cart", [CartController::class, "storeCart"]);
 
 // Auth
 Route::get("/login", [LoginController::class, "index"])->middleware("guest");
@@ -34,9 +35,13 @@ Route::post("/regist", [RegisterController::class, "store"])->middleware("guest"
 
 Route::get("/logout", [LoginController::class, "logout"])->middleware("auth");
 
-Route::get("/dashboard/carts", [CartController::class, "showAllCarts"])->middleware("auth");
+Route::get("/dashboard/user/carts", [CartController::class, "showAllCarts"])->middleware("auth");
+Route::post("/dashboard/user/carts/checkout/{transactions}", [CartController::class, "checkOut"])->middleware("auth");
 
-Route::get("/dashboard/profile", [DashboardController::class, "profile"])->middleware("auth");
-Route::put("/dashboard/profile/{user}", [DashboardController::class, "updateUser"])->middleware("auth");
+
+Route::get("/dashboard/user/profile", [DashboardController::class, "profile"])->middleware("auth");
+Route::put("/dashboard/user/profile/{user}", [DashboardController::class, "updateUser"])->middleware("auth");
 
 Route::resource("/dashboard/products", ProductController::class)->middleware("auth");
+Route::get("/dashboard/orders", [CartController::class, "showAllOrders"])->middleware("auth");
+Route::post("/dashboard/orders/confirmAdmin/{transactions}", [CartController::class, "confirmAdmin"])->middleware("auth");

@@ -55,6 +55,7 @@ return [
             'charset' => 'utf8mb4',
             'collation' => 'utf8mb4_unicode_ci',
             'prefix' => '',
+            "timezone" => "+07:00",
             'prefix_indexes' => true,
             'strict' => true,
             'engine' => null,
@@ -88,6 +89,7 @@ return [
             'password' => env('DB_PASSWORD', ''),
             'charset' => 'utf8',
             'prefix' => '',
+            "timezone" => "+07:00",
             'prefix_indexes' => true,
         ],
 

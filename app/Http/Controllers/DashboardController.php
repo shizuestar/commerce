@@ -18,7 +18,13 @@ class DashboardController extends Controller
 
     public function profile(){
         $user_login = User::where("id", auth()->user()->id)->get();
-        return view("dashboard.profile", [
+        return view("dashboard.user.profile", [
+            "user" => $user_login
+        ]);
+    }
+    public function carts(){
+        $user_login = User::where("id", auth()->user()->id)->get();
+        return view("dashboard.user.index", [
             "user" => $user_login
         ]);
     }
@@ -36,6 +42,6 @@ class DashboardController extends Controller
         User::where("id", auth()->user()->id)->update($validateData);
 
         // succes
-        return redirect("/dashboard/profile")->with("succes", "Your Profile has ben Updated!");
+        return redirect("/dashboard/user/profile")->with("succes", "Your Profile has ben Updated!");
     }
 }
